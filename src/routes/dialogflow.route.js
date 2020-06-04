@@ -27,7 +27,8 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post("/message/text/send", async (req, res) => {
-  let { text, email, sessionId } = req.body;
+  let { text } = req.body;
+  let sessionId = "AAA-111"; //simulando uma chave de se auth
   let { projectId, sessionClient } = dialogflowClient;
   let sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
@@ -35,7 +36,6 @@ router.post("/message/text/send", async (req, res) => {
   console.log("Text Message to Dialogflow");
   console.log("Question...: " + text);
   console.log("SessionId..: " + sessionId);
-  console.log("Email......: " + email);
   console.log("############################");
 
   const responses = await sessionClient.detectIntent({
